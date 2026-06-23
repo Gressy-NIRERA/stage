@@ -52,6 +52,7 @@ class _RegistrationState extends State<Registration> {
               begin: Alignment.topCenter,
               colors: [
                 Colors.grey,
+               Colors.grey.shade100
               ],
             ),
           ),

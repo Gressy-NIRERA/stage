@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:stage/api.dart';
 import 'register.dart';
 
 void main() => runApp(const MyApp());
@@ -25,13 +27,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController _emailCtrl = TextEditingController();
-  final TextEditingController _passwordCtrl = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  bool loading = false;
+  Color bgColor = Colors.orange;
+
+
+final api = Api(Dio());
+
+  Future <void> login() async {
+    setState(() {
+      loading = true;
+      bgColor = Colors.black;
+    });
+    try{
+      final response = await api.userlogin(email.text , password.text);
+      setState(() {
+        loading = false;
+        bgColor = Colors.green;
+      });
+      print("$response");
+
+    }
+    catch(e){
+      setState(() {
+        loading = false;
+        bgColor = Colors.red;
+      });
+      print("erreur $e");
+    }
+  }
 
   @override
   void dispose() {
-    _emailCtrl.dispose();
-    _passwordCtrl.dispose();
+    email.dispose();
+    password.dispose();
     super.dispose();
   }
 
@@ -100,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                                   border: Border(
                                       bottom: BorderSide(color: Colors.grey))),
                               child: TextField(
-                                controller: _emailCtrl,
+                                controller: email,
                                 decoration: const InputDecoration(
                                     labelText: 'Email or Phone number',
                                     border: InputBorder.none),
@@ -108,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Container(
                               child: TextField(
-                                controller: _passwordCtrl,
+                                controller: password,
                                 obscureText: true,
                                 decoration: const InputDecoration(
                                     labelText: 'Mot de passe',
@@ -123,15 +153,15 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: () {
-                          // Add login logic
+                           login();
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orange[900],
+                            backgroundColor: bgColor,
                             padding: const EdgeInsets.symmetric(
                                 vertical: 16, horizontal: 48),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50))),
-                        child: const Text('Se connecter',
+                        child:  Text(loading ?  'loading ..' : 'Se connecter' ,
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18)),
                       ),
