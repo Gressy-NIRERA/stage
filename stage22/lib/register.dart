@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:stage22/api.dart';
 
 class Registration extends StatefulWidget {
   const Registration({super.key});
@@ -15,14 +17,20 @@ class _RegistrationState extends State<Registration> {
   final TextEditingController phonenumber = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirm = TextEditingController();
-
-  void _submitForm() {
-    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Inscription réussie')));
-      
-    }
+final apire = Api((Dio()));
+String country= "BI";
+Future<void> register() async{
+  
+  try{
+final response = apire.register(firstname.text, lastname.text,int.parse(phonenumber.text) , email.text, country, password.text, confirm.text);
+print("$response");
   }
+  catch(e){
+print("$e");
+  }
+}
+  
+  
    @override
   void dispose() {
     firstname.dispose();
@@ -155,7 +163,7 @@ class _RegistrationState extends State<Registration> {
                       ),
                     ),
                     ElevatedButton(
-                        onPressed: _submitForm, child: const Text('Submit'))
+                        onPressed: register, child: const Text('Submit'))
                   ],
                 ),
               ),
