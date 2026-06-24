@@ -25,12 +25,13 @@ class Api {
     final response = await dio.post(
       '$baseurl/user/register',
       data: {
-        "firstname": firstname,
-        "lastname": lastname,
-        "phonenumber": phonenumber,
-        "email": email,
-        "password": password,
-        "confirm_password": confirm_password,
+      "firstname": "firstname",
+        "lastname": "lastname",
+        "phonenumber": "phonenumber",
+        "email": "email",
+        "password": "password",
+        "confirm_password": "confirm_password",
+        "country": "country"
       },
     );
     return response.data;

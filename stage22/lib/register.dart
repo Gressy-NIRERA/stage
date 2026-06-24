@@ -17,6 +17,7 @@ class _RegistrationState extends State<Registration> {
   final TextEditingController phonenumber = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirm = TextEditingController();
+
 final apire = Api((Dio()));
 String country= "BI";
 Future<void> register() async{
