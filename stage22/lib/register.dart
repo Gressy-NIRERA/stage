@@ -9,12 +9,12 @@ class Registration extends StatefulWidget {
 
 class _RegistrationState extends State<Registration> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameCtrl = TextEditingController();
-  final TextEditingController _surnameCtrl = TextEditingController();
-  final TextEditingController _emailCtrl = TextEditingController();
-  final TextEditingController _phoneCtrl = TextEditingController();
-  final TextEditingController _passwordCtrl = TextEditingController();
-  final TextEditingController _confirmCtrl = TextEditingController();
+  final TextEditingController firstname = TextEditingController();
+  final TextEditingController lastname = TextEditingController();
+  final TextEditingController email= TextEditingController();
+  final TextEditingController phonenumber = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final TextEditingController confirm = TextEditingController();
 
   void _submitForm() {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
@@ -25,12 +25,12 @@ class _RegistrationState extends State<Registration> {
   }
    @override
   void dispose() {
-    _nameCtrl.dispose();
-    _surnameCtrl.dispose();
-    _emailCtrl.dispose();
-    _phoneCtrl.dispose();
-    _passwordCtrl.dispose();
-    _confirmCtrl.dispose();
+    firstname.dispose();
+    lastname.dispose();
+    email.dispose();
+    phonenumber.dispose();
+    password.dispose();
+    confirm.dispose();
     super.dispose();
   }
   @override
@@ -62,7 +62,7 @@ class _RegistrationState extends State<Registration> {
                 child: Column(
                   children: [
                     TextFormField(
-                      controller: _nameCtrl,
+                      controller: firstname,
                       decoration: InputDecoration(
                           labelText: "enter Name",
                           hintStyle: const TextStyle(color: Colors.grey),
@@ -77,7 +77,7 @@ class _RegistrationState extends State<Registration> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        controller: _surnameCtrl,
+                        controller: lastname,
                         decoration: InputDecoration(
                             labelText: "enter surname",
                             hintStyle: const TextStyle(color: Colors.grey),
@@ -92,7 +92,7 @@ class _RegistrationState extends State<Registration> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        controller: _emailCtrl,
+                        controller: email,
                         decoration: InputDecoration(
                             labelText: "enter email",
                             hintStyle: const TextStyle(color: Colors.grey),
@@ -107,7 +107,7 @@ class _RegistrationState extends State<Registration> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        controller: _phoneCtrl,
+                        controller: phonenumber,
                         decoration: InputDecoration(
                             labelText: "enter phone number",
                             hintStyle: const TextStyle(color: Colors.grey),
@@ -122,7 +122,7 @@ class _RegistrationState extends State<Registration> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        controller: _passwordCtrl,
+                        controller: password,
                         decoration: InputDecoration(
                             labelText: "enter password",
                             hintStyle: const TextStyle(color: Colors.grey),
@@ -139,7 +139,7 @@ class _RegistrationState extends State<Registration> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        controller: _confirmCtrl,
+                        controller: confirm,
                         decoration: InputDecoration(
                             labelText: "confirm password",
                             hintStyle: const TextStyle(color: Colors.grey),
@@ -147,7 +147,7 @@ class _RegistrationState extends State<Registration> {
                         validator: (value) {
                           if (value == null || value.isEmpty)
                             return 'please confirm password';
-                          if (value != _passwordCtrl.text)
+                          if (value != password.text)
                             return 'passwords do not match';
                           return null;
                         },
